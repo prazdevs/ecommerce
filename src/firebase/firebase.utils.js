@@ -13,6 +13,8 @@ const config = {
   measurementId: 'G-H3FF3W4GKZ',
 };
 
+firebase.initializeApp(config);
+
 export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!userAuth) return;
 
@@ -23,7 +25,6 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   if (!snapShot.exists) {
     const { displayName, email } = userAuth;
     const createdAt = new Date();
-
     try {
       await userRef.set({
         displayName,
@@ -39,13 +40,14 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   return userRef;
 };
 
-firebase.initializeApp(config);
-
-export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
+export const addCollectionAndDocuments = async (
+  collectionKey,
+  objectsToAdd
+) => {
   const collectionRef = firestore.collection(collectionKey);
 
   const batch = firestore.batch();
-  objectToAdd.forEach(obj => {
+  objectsToAdd.forEach(obj => {
     const newDocRef = collectionRef.doc();
     batch.set(newDocRef, obj);
   });
@@ -54,7 +56,7 @@ export const addCollectionAndDocuments = async (collectionKey, objectToAdd) => {
 };
 
 export const convertCollectionsSnapshotToMap = collections => {
-  const transformedCollections = collections.docs.map(doc => {
+  const transformedCollection = collections.docs.map(doc => {
     const { title, items } = doc.data();
 
     return {
@@ -65,7 +67,7 @@ export const convertCollectionsSnapshotToMap = collections => {
     };
   });
 
-  return transformedCollections.reduce((accumulator, collection) => {
+  return transformedCollection.reduce((accumulator, collection) => {
     accumulator[collection.title.toLowerCase()] = collection;
     return accumulator;
   }, {});

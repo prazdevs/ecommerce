@@ -19,14 +19,14 @@ const INITIAL_STATE = {
       linkUrl: 'shop/sneakers',
     },
     {
-      title: 'new Collection',
+      title: 'newCollection',
       imageUrl: 'https://i.ibb.co/GCCdy8t/womens.png',
       size: 'large',
       id: 4,
       linkUrl: 'shop/newCollection',
     },
     {
-      title: 'old Collection',
+      title: 'oldCollection',
       imageUrl: 'https://i.ibb.co/R70vBrQ/men.png',
       size: 'large',
       id: 5,
