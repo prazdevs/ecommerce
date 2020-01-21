@@ -6,13 +6,13 @@ import CustomButton from '../custom-button/custom-button.component';
 
 import {
   googleSignInStart,
-  emailSignInStart,
+  emailSignInStart
 } from '../../redux/user/user.actions';
 
 import {
   SignInContainer,
   SignInTitle,
-  ButtonsBarContainer,
+  ButtonsBarContainer
 } from './sign-in.styles';
 
 class SignIn extends React.Component {
@@ -21,13 +21,12 @@ class SignIn extends React.Component {
 
     this.state = {
       email: '',
-      password: '',
+      password: ''
     };
   }
 
   handleSubmit = async event => {
     event.preventDefault();
-
     const { emailSignInStart } = this.props;
     const { email, password } = this.state;
 
@@ -69,7 +68,8 @@ class SignIn extends React.Component {
             <CustomButton
               type='button'
               onClick={googleSignInStart}
-              isGoogleSignIn>
+              isGoogleSignIn
+            >
               Sign in with Google
             </CustomButton>
           </ButtonsBarContainer>
@@ -82,7 +82,10 @@ class SignIn extends React.Component {
 const mapDispatchToProps = dispatch => ({
   googleSignInStart: () => dispatch(googleSignInStart()),
   emailSignInStart: (email, password) =>
-    dispatch(emailSignInStart({ email, password })),
+    dispatch(emailSignInStart({ email, password }))
 });
 
-export default connect(null, mapDispatchToProps)(SignIn);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignIn);
