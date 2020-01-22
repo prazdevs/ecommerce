@@ -13,12 +13,12 @@ const SignUp = ({ signUpStart }) => {
     displayName: '',
     email: '',
     password: '',
-    confirmPassword: '',
+    confirmPassword: ''
   });
 
   const { displayName, email, password, confirmPassword } = userCredentials;
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
@@ -31,6 +31,7 @@ const SignUp = ({ signUpStart }) => {
 
   const handleChange = event => {
     const { name, value } = event.target;
+
     setUserCredentials({ ...userCredentials, [name]: value });
   };
 
@@ -78,7 +79,10 @@ const SignUp = ({ signUpStart }) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  signUpStart: userCredentials => dispatch(signUpStart(userCredentials)),
+  signUpStart: userCredentials => dispatch(signUpStart(userCredentials))
 });
 
-export default connect(null, mapDispatchToProps)(SignUp);
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignUp);
